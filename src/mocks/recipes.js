@@ -12,7 +12,7 @@ export const recipes = [
     ingridients: `Bananas, Milk, Ice cream`
   },
   {
-    id: 6,
+    id: 2,
     title: `Pizza`,
     time: 3,
     ingridients: `Dough, Fresh basil leaves, Pinch red pepper flakes, Mozzarella`

@@ -1,15 +1,8 @@
-import {Accordion, Button, Card, Container, ListGroup} from 'react-bootstrap';
+import {Accordion, Button, Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {recipes} from './mocks/recipes';
-
-const getTimeUnits = (time) => {
-  if (time > 0 && time <= 1) {
-    return ` hour`;
-  }
-
-  return ` hours`;
-};
+import AccordionItem from './accordion-item/accordion-item';
 
 function App() {
   return (
@@ -19,23 +12,7 @@ function App() {
 
       <Accordion className="mb-4">
 
-        {recipes.map((recipe) => 
-          <Card id={recipe.id} key={`recipe-${recipe.id}`}>
-
-            <Accordion.Toggle as={Card.Header} eventKey={recipe.id + 1} className="d-flex justify-content-between">
-              <p className="mb-0">{recipe.title}</p>
-              <p className="mb-0">
-                {recipe.time + getTimeUnits(recipe.time)}</p>
-            </Accordion.Toggle>
-
-            <Accordion.Collapse eventKey={recipe.id + 1}>
-              <ListGroup>
-                <ListGroup.Item>{recipe.ingridients}</ListGroup.Item>
-              </ListGroup>
-            </Accordion.Collapse>
-            
-          </Card>
-        )}
+        {recipes.map((recipe) => <AccordionItem recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} />)}
 
       </Accordion>
 
