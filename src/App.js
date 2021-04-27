@@ -3,8 +3,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {recipes} from './mocks/recipes';
 
+const getTimeUnits = (time) => {
+  if (time > 0 && time <= 1) {
+    return ` hour`;
+  }
+
+  return ` hours`;
+};
+
 function App() {
   return (
+
     <Container className="pt-5">
       <h1 className="mb-5 text-center">It's a recipes app! You're welcome!</h1>
 
@@ -16,7 +25,7 @@ function App() {
             <Accordion.Toggle as={Card.Header} eventKey={recipe.id + 1} className="d-flex justify-content-between">
               <p className="mb-0">{recipe.title}</p>
               <p className="mb-0">
-                {recipe.time + ` hours`}</p>
+                {recipe.time + getTimeUnits(recipe.time)}</p>
             </Accordion.Toggle>
 
             <Accordion.Collapse eventKey={recipe.id + 1}>

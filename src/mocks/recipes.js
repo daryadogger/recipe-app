@@ -8,7 +8,7 @@ export const recipes = [
   {
     id: 1,
     title: `Banana milkshake`,
-    time: 1,
+    time: 0.5,
     ingridients: `Bananas, Milk, Ice cream`
   },
   {
