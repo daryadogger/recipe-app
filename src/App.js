@@ -3,8 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {recipes} from './mocks/recipes';
 import AccordionItem from './accordion-item/accordion-item';
+import {useState} from 'react';
+import AddRecipe from './add-recipe/add-recipe';
 
 function App() {
+  const [isShowModal, setIsShowModal] = useState(false);
+
+  const handleBtnAddRecipeClick = () => {
+    setIsShowModal(true);
+  };
+
   return (
 
     <Container className="pt-5">
@@ -16,7 +24,8 @@ function App() {
 
       </Accordion>
 
-      <Button variant="info" size="lg">Add recipe</Button>
+      <Button variant="info" size="lg" onClick={handleBtnAddRecipeClick}>Add recipe</Button>
+      <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} />
 
     </Container>
 
