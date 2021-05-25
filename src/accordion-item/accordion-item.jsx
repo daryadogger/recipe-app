@@ -1,4 +1,6 @@
+import { useState } from "react";
 import {Accordion, Card, ListGroup, Button, ButtonToolbar} from "react-bootstrap";
+import EditRecipe from "../edit-recipe/edit-recipe";
 
 const getTimeUnits = (time) => {
   if (time > 0 && time <= 1) {
@@ -13,11 +15,17 @@ const getListOfIngridients = (string, separator) => {
 };
 
 function AccordionItem(props) {
-  const {recipe} = props;
+  const {recipe, setRecipe} = props;
   const ingridients = getListOfIngridients(recipe.ingridients, `,`);
+
+  const [isShowEditModal, setIsShowEditModal] = useState(false);
 
   const handleDeleteRecipe = () => {
 
+  };
+
+  const handleBtnEditRecipeClick = () => {
+    setIsShowEditModal(true);
   };
 
   return(
@@ -38,10 +46,11 @@ function AccordionItem(props) {
           </ListGroup>
 
           <ButtonToolbar>
-            <Button className="mr-2" variant="outline-secondary" size="sm">Edit</Button>
+            <Button className="mr-2" variant="outline-secondary" size="sm" onClick={handleBtnEditRecipeClick}>Edit</Button>
             <Button variant="outline-danger" size="sm" onClick={handleDeleteRecipe}>Delete</Button>
           </ButtonToolbar>
 
+          <EditRecipe onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} setRecipe={setRecipe} />
         </div>
       </Accordion.Collapse>
       

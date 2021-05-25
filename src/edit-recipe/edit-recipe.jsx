@@ -1,19 +1,19 @@
 import {Button, Form, Modal} from "react-bootstrap";
 
-function AddRecipe(props) {
-    const {onShow, setIsShowModal, isPostDisabled, setRecipe, recipe} = props;
-
-    const setName = (evt) => setRecipe({...recipe, name: evt.target.value});
-    const setIngredients = (evt) => setRecipe({...recipe, ingredients: evt.target.value});
+function EditRecipe(props) {
+    const {onShow, setIsShowEditModal, setRecipe, recipe} = props;
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
     };
 
+    const setName = (evt) => setRecipe({...recipe, name: evt.target.value});
+    const setIngredients = (evt) => setRecipe({...recipe, ingredients: evt.target.value});
+
     return(
-        <Modal show={onShow} onHide={() => {setIsShowModal(false)}}>
+        <Modal show={onShow} onHide={() => {setIsShowEditModal(false)}}>
             <Modal.Header closeButton>
-                <Modal.Title>New Recipe</Modal.Title>
+                <Modal.Title>Edit Recipe</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
@@ -26,11 +26,11 @@ function AddRecipe(props) {
                         <Form.Label>Recipe Ingredients</Form.Label>
                         <Form.Control type="text" required onChange={setIngredients} defaultValue={recipe.ingredients} placeholder="Enter Ingredients(separate by commas)" />
                     </Form.Group>
-                    <Button variant="success" type="submit" disabled={isPostDisabled}>Save Recipe</Button>
+                    <Button variant="success" type="submit">Save Recipe</Button>
                 </Form>
             </Modal.Body>
         </Modal>
     );
 };
 
-export default AddRecipe;
+export default EditRecipe;
