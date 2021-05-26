@@ -1,7 +1,10 @@
 import {Button, Form, Modal} from "react-bootstrap";
+// import {shallowEqual, useSelector} from 'react-redux';
 
 function EditRecipe(props) {
     const {onShow, setIsShowEditModal, setRecipe, recipe} = props;
+
+    // const film = useSelector((state) => state.films.find((el) => el.id === id), shallowEqual);
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {Accordion, Card, ListGroup, Button, ButtonToolbar} from "react-bootstrap";
 import EditRecipe from "../edit-recipe/edit-recipe";
+// import {shallowEqual, useSelector} from 'react-redux';
 
 const getTimeUnits = (time) => {
   if (time > 0 && time <= 1) {
@@ -20,6 +21,10 @@ function AccordionItem(props) {
 
   const [isShowEditModal, setIsShowEditModal] = useState(false);
 
+  // const recipes = useSelector((state) => state.recipes.find((el) => el.id === id), shallowEqual);
+  // const index = ;
+  // const recipes = useSelector((state) => state.recipes.slice().splice(index, 1), shallowEqual);
+  // потом обновить массив рецептов в store
   const handleDeleteRecipe = () => {
 
   };

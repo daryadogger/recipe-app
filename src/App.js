@@ -1,7 +1,6 @@
 import {Accordion, Button, Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {recipes} from './mocks/recipes';
 import AccordionItem from './accordion-item/accordion-item';
 import {useEffect, useState} from 'react';
 import AddRecipe from './add-recipe/add-recipe';
@@ -10,7 +9,8 @@ const RecipeLength = {
   MIN: 1,
 };
 
-function App() {
+function App(props) {
+  const {recipes} = props;
   const [isShowModal, setIsShowModal] = useState(false);
   const [isPostDisabled, setIsPostDisabled] = useState(true);
 
