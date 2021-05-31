@@ -1,13 +1,14 @@
 import {Button, Form, Modal} from "react-bootstrap";
 
 function AddRecipe(props) {
-    const {onShow, setIsShowModal, isPostDisabled, setRecipe, recipe} = props;
+    const {onShow, setIsShowModal, isPostDisabled, setNewRecipe, newRecipe, onFormSubmit} = props;
 
-    const setName = (evt) => setRecipe({...recipe, name: evt.target.value});
-    const setIngredients = (evt) => setRecipe({...recipe, ingredients: evt.target.value});
+    const setName = (evt) => setNewRecipe({...newRecipe, name: evt.target.value});
+    const setIngredients = (evt) => setNewRecipe({...newRecipe, ingredients: evt.target.value});
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
+        onFormSubmit();
     };
 
     return(
@@ -20,11 +21,11 @@ function AddRecipe(props) {
                 <Form action="#" className="add-review__form" onSubmit={handleFormSubmit}>
                     <Form.Group controlId="recipeName">
                         <Form.Label>Recipe Name</Form.Label>
-                        <Form.Control type="text" required onChange={setName} defaultValue={recipe.name} placeholder="Enter Name" />
+                        <Form.Control type="text" required onChange={setName} defaultValue={newRecipe.name} placeholder="Enter Name" />
                     </Form.Group>
                     <Form.Group controlId="recipeIngredients">
                         <Form.Label>Recipe Ingredients</Form.Label>
-                        <Form.Control type="text" required onChange={setIngredients} defaultValue={recipe.ingredients} placeholder="Enter Ingredients(separate by commas)" />
+                        <Form.Control type="text" required onChange={setIngredients} defaultValue={newRecipe.ingredients} placeholder="Enter Ingredients(separate by commas)" />
                     </Form.Group>
                     <Button variant="success" type="submit" disabled={isPostDisabled}>Save Recipe</Button>
                 </Form>

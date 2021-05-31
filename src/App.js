@@ -10,25 +10,44 @@ const RecipeLength = {
 };
 
 function App(props) {
-  const {recipes} = props;
+  const {recipesMocks} = props;
   const [isShowModal, setIsShowModal] = useState(false);
   const [isPostDisabled, setIsPostDisabled] = useState(true);
 
-  const [recipe, setRecipe] = useState({
+  const [recipes, setRecipes] = useState(recipesMocks);
+  const [newRecipe, setNewRecipe] = useState({
     name: ``,
-    ingredients: ``,
-});
+    ingredients: ``
+  });
 
   useEffect(() => {
-    if (recipe.name.length > RecipeLength.MIN && recipe.ingredients.length > RecipeLength.MIN) {
-      setIsPostDisabled(true);
-    } else {
+    if (newRecipe.name.length > RecipeLength.MIN && newRecipe.ingredients.length > RecipeLength.MIN) {
       setIsPostDisabled(false);
+    } else {
+      setIsPostDisabled(true);
     }
-  }, [recipe]);
+  }, [newRecipe]);
 
   const handleBtnAddRecipeClick = () => {
     setIsShowModal(true);
+  };
+
+  const handleDeleteRecipe = (id) => {
+    let newArr = recipes.slice();
+    newArr.splice(id, 1)
+    setRecipes(newArr);
+  };
+
+  const handleAddNewRecipe = () => {
+    let newArr = recipes.slice();
+    newArr.concat([{
+      id: 4,
+      name: `sss`,
+      ingredients: `sdsd`
+    }]);
+    setRecipes(newArr);
+
+    console.log(recipes);
   };
 
   return (
@@ -38,12 +57,12 @@ function App(props) {
 
       <Accordion className="mb-4">
 
-        {recipes.map((recipe) => <AccordionItem setRecipe={setRecipe} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} />)}
+        {recipes.map((recipe) => <AccordionItem setRecipes={setRecipes} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} onDeleteRecipeClick={handleDeleteRecipe} />)}
 
       </Accordion>
 
       <Button variant="info" size="lg" onClick={handleBtnAddRecipeClick}>Add recipe</Button>
-      <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} isPostDisabled={isPostDisabled} recipe={recipe} setRecipe={setRecipe} />
+      <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} isPostDisabled={isPostDisabled} newRecipe={newRecipe} setNewRecipe={setNewRecipe} onFormSubmit={handleAddNewRecipe} />
 
     </Container>
 
