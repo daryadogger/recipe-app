@@ -5,6 +5,8 @@ function EditRecipe(props) {
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
+        // onEditFormSubmit();
+        setIsShowEditModal(false);
     };
 
     const setName = (evt) => setRecipe({...recipe, name: evt.target.value});

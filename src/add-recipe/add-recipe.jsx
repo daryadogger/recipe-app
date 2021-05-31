@@ -9,6 +9,7 @@ function AddRecipe(props) {
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
         onFormSubmit();
+        setIsShowModal(false);
     };
 
     return(
