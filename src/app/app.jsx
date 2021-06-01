@@ -33,21 +33,19 @@ function App(props) {
     };
 
     const handleDeleteRecipe = (id) => {
-        let newArr = recipes.slice();
-        newArr.splice(id, 1)
-        setRecipes(newArr);
+        let _recipes = recipes.slice();
+        let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
+
+        _recipes.splice(recipeIndex, 1);
+        console.log(id);
+        console.log(_recipes);
+        setRecipes(_recipes);
     };
 
     const handleAddNewRecipe = () => {
-        let newArr = recipes.slice();
-        newArr.concat([{
-        id: 4,
-        name: `sss`,
-        ingredients: `sdsd`
-        }]);
-        setRecipes(newArr);
-
-        console.log(recipes);
+        let _recipes = recipes.slice();
+        _recipes.push(newRecipe);
+        setRecipes(_recipes);
     };
 
     return (

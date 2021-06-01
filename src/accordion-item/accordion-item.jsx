@@ -2,13 +2,13 @@ import { useState } from "react";
 import {Accordion, Card, ListGroup, Button, ButtonToolbar} from "react-bootstrap";
 import EditRecipe from "../edit-recipe/edit-recipe";
 
-const getListOfIngridients = (string, separator) => {
+const getListOfIngredients = (string, separator) => {
   return string.split(separator);
 };
 
 function AccordionItem(props) {
   const {recipe, setRecipe, onDeleteRecipeClick, id} = props;
-  const ingridients = getListOfIngridients(recipe.ingridients, `,`);
+  const ingredients = getListOfIngredients(recipe.ingredients, `,`);
 
   const [isShowEditModal, setIsShowEditModal] = useState(false);
 
@@ -21,14 +21,14 @@ function AccordionItem(props) {
     <Card>
 
       <Accordion.Toggle as={Card.Header} eventKey={recipe.id + 1} className="d-flex justify-content-between">
-        <p className="mb-0">{recipe.title}</p>
+        <p className="mb-0">{recipe.name}</p>
       </Accordion.Toggle>
 
       <Accordion.Collapse eventKey={recipe.id + 1}>
         <div className="p-3">
 
           <ListGroup className="mb-3">
-            {ingridients.map((ingridient) => <ListGroup.Item key={`ingridient-${ingridient}`} >{ingridient}</ListGroup.Item>)}
+            {ingredients.map((ingridient) => <ListGroup.Item key={`ingridient-${ingridient}`} >{ingridient}</ListGroup.Item>)}
           </ListGroup>
 
           <ButtonToolbar>
