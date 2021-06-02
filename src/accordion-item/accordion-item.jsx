@@ -36,7 +36,7 @@ function AccordionItem(props) {
             <Button variant="outline-danger" size="sm" onClick={() => {onDeleteRecipeClick(id)}}>Delete</Button>
           </ButtonToolbar>
 
-          <EditRecipe onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} setRecipe={setRecipe} />
+          <EditRecipe onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} setRecipe={setRecipe} id={id} />
         </div>
       </Accordion.Collapse>
       

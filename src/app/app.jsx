@@ -9,6 +9,10 @@ const RecipeLength = {
     MIN: 1,
 };
 
+const getUniqueId = () => {
+    return Math.random().toString(36).substr(2, 9);
+};
+
 function App(props) {
     const {recipesMocks} = props;
     const [isShowModal, setIsShowModal] = useState(false);
@@ -19,6 +23,12 @@ function App(props) {
         name: ``,
         ingredients: ``
     });
+    const [editRecipe, setEditRecipe] = useState({
+        name: ``,
+        ingredients: ``
+        // name: recipe.name,
+        // ingredients: recipe.ingredients
+    });
 
     useEffect(() => {
         if (newRecipe.name.length > RecipeLength.MIN && newRecipe.ingredients.length > RecipeLength.MIN) {
@@ -27,6 +37,14 @@ function App(props) {
         setIsPostDisabled(true);
         }
     }, [newRecipe]);
+
+    useEffect(() => {
+        if (editRecipe.name.length > RecipeLength.MIN && editRecipe.ingredients.length > RecipeLength.MIN) {
+        setIsPostDisabled(false);
+        } else {
+        setIsPostDisabled(true);
+        }
+    }, [editRecipe]);
 
     const handleBtnAddRecipeClick = () => {
         setIsShowModal(true);
@@ -44,7 +62,17 @@ function App(props) {
 
     const handleAddNewRecipe = () => {
         let _recipes = recipes.slice();
+        let uniqueId = getUniqueId();
+        setNewRecipe({...newRecipe, id: uniqueId});
         _recipes.push(newRecipe);
+        setRecipes(_recipes);
+    };
+
+    const handleEditRecipe = (id) => {
+        let _recipes = recipes.slice();
+        let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
+        console.log(recipeIndex)
+        _recipes.splice(recipeIndex, 1, editRecipe);
         setRecipes(_recipes);
     };
 
@@ -55,7 +83,7 @@ function App(props) {
 
         <Accordion className="mb-4">
 
-            {recipes.map((recipe) => <AccordionItem setRecipes={setRecipes} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} onDeleteRecipeClick={handleDeleteRecipe} />)}
+            {recipes.map((recipe) => <AccordionItem onEditRecipe={handleEditRecipe} setEditRecipe={setEditRecipe} editRecipe={editRecipe} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} onDeleteRecipeClick={handleDeleteRecipe} />)}
 
         </Accordion>
 

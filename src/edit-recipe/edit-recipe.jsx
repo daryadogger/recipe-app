@@ -1,16 +1,19 @@
+// import {useState} from "react";
 import {Button, Form, Modal} from "react-bootstrap";
 
 function EditRecipe(props) {
-    const {onShow, setIsShowEditModal, setRecipe, recipe} = props;
+    const {onShow, setIsShowEditModal, handleEditRecipe, setEditRecipe, editRecipe, recipe, id} = props;
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
         // onEditFormSubmit();
+        handleEditRecipe(id);
         setIsShowEditModal(false);
     };
 
-    const setName = (evt) => setRecipe({...recipe, name: evt.target.value});
-    const setIngredients = (evt) => setRecipe({...recipe, ingredients: evt.target.value});
+    const setName = (evt) => setEditRecipe({...editRecipe, name: evt.target.value});
+    console.log(setName)
+    const setIngredients = (evt) => setEditRecipe({...editRecipe, ingredients: evt.target.value});
 
     return(
         <Modal show={onShow} onHide={() => {setIsShowEditModal(false)}}>
