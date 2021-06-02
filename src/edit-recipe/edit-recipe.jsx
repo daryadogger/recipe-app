@@ -1,19 +1,37 @@
 // import {useState} from "react";
+import { useEffect, useState } from "react";
 import {Button, Form, Modal} from "react-bootstrap";
 
+const RecipeLength = {
+    MIN: 1,
+};
+
 function EditRecipe(props) {
-    const {onShow, setIsShowEditModal, handleEditRecipe, setEditRecipe, editRecipe, recipe, id} = props;
+    const {onShow, setIsShowEditModal, onEditRecipe, recipe, id} = props;
+
+    const [isPostDisabled, setIsPostDisabled] = useState(true);
+    const [editRecipe, setEditRecipe] = useState({
+        id: recipe.id,
+        name: recipe.name,
+        ingredients: recipe.ingredients
+    });
+    const setName = (evt) => setEditRecipe({...editRecipe, name: evt.target.value});
+    const setIngredients = (evt) => setEditRecipe({...editRecipe, ingredients: evt.target.value});
+
+    useEffect(() => {
+        if (editRecipe.name.length > RecipeLength.MIN && editRecipe.ingredients.length > RecipeLength.MIN) {
+        setIsPostDisabled(false);
+        } else {
+        setIsPostDisabled(true);
+        }
+    }, [editRecipe]);
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
-        // onEditFormSubmit();
-        handleEditRecipe(id);
+        onEditRecipe(id, editRecipe);
         setIsShowEditModal(false);
     };
 
-    const setName = (evt) => setEditRecipe({...editRecipe, name: evt.target.value});
-    console.log(setName)
-    const setIngredients = (evt) => setEditRecipe({...editRecipe, ingredients: evt.target.value});
 
     return(
         <Modal show={onShow} onHide={() => {setIsShowEditModal(false)}}>
@@ -31,7 +49,7 @@ function EditRecipe(props) {
                         <Form.Label>Recipe Ingredients</Form.Label>
                         <Form.Control type="text" required onChange={setIngredients} defaultValue={recipe.ingredients} placeholder="Enter Ingredients(separate by commas)" />
                     </Form.Group>
-                    <Button variant="success" type="submit">Save Recipe</Button>
+                    <Button variant="success" type="submit" disabled={isPostDisabled}>Save Recipe</Button>
                 </Form>
             </Modal.Body>
         </Modal>

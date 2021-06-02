@@ -20,14 +20,9 @@ function App(props) {
 
     const [recipes, setRecipes] = useState(recipesMocks);
     const [newRecipe, setNewRecipe] = useState({
+        id: ``,
         name: ``,
         ingredients: ``
-    });
-    const [editRecipe, setEditRecipe] = useState({
-        name: ``,
-        ingredients: ``
-        // name: recipe.name,
-        // ingredients: recipe.ingredients
     });
 
     useEffect(() => {
@@ -38,15 +33,8 @@ function App(props) {
         }
     }, [newRecipe]);
 
-    useEffect(() => {
-        if (editRecipe.name.length > RecipeLength.MIN && editRecipe.ingredients.length > RecipeLength.MIN) {
-        setIsPostDisabled(false);
-        } else {
-        setIsPostDisabled(true);
-        }
-    }, [editRecipe]);
-
     const handleBtnAddRecipeClick = () => {
+        //очистить форму
         setIsShowModal(true);
     };
 
@@ -55,8 +43,6 @@ function App(props) {
         let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
 
         _recipes.splice(recipeIndex, 1);
-        console.log(id);
-        console.log(_recipes);
         setRecipes(_recipes);
     };
 
@@ -68,7 +54,7 @@ function App(props) {
         setRecipes(_recipes);
     };
 
-    const handleEditRecipe = (id) => {
+    const handleEditRecipe = (id, editRecipe) => {
         let _recipes = recipes.slice();
         let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
         console.log(recipeIndex)
@@ -83,7 +69,7 @@ function App(props) {
 
         <Accordion className="mb-4">
 
-            {recipes.map((recipe) => <AccordionItem onEditRecipe={handleEditRecipe} setEditRecipe={setEditRecipe} editRecipe={editRecipe} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} onDeleteRecipeClick={handleDeleteRecipe} />)}
+            {recipes.map((recipe) => <AccordionItem onEditRecipe={handleEditRecipe} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} onDeleteRecipeClick={handleDeleteRecipe} />)}
 
         </Accordion>
 

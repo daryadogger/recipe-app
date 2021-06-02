@@ -7,7 +7,7 @@ const getListOfIngredients = (string, separator) => {
 };
 
 function AccordionItem(props) {
-  const {recipe, setRecipe, onDeleteRecipeClick, id} = props;
+  const {recipe, onEditRecipe, onDeleteRecipeClick, id} = props;
   const ingredients = getListOfIngredients(recipe.ingredients, `,`);
 
   const [isShowEditModal, setIsShowEditModal] = useState(false);
@@ -36,7 +36,7 @@ function AccordionItem(props) {
             <Button variant="outline-danger" size="sm" onClick={() => {onDeleteRecipeClick(id)}}>Delete</Button>
           </ButtonToolbar>
 
-          <EditRecipe onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} setRecipe={setRecipe} id={id} />
+          <EditRecipe onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} onEditRecipe={onEditRecipe} id={id} />
         </div>
       </Accordion.Collapse>
       
