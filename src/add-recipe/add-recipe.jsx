@@ -1,15 +1,41 @@
+import {useEffect, useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
+const getUniqueId = () => {
+    return Math.random().toString(36).substr(2, 9);
+};
+
+const RecipeLength = {
+    MIN: 1,
+};
+
 function AddRecipe(props) {
-    const {onShow, setIsShowModal, isPostDisabled, setNewRecipe, newRecipe, onFormSubmit} = props;
+    const {onShow, setIsShowModal, onFormSubmit} = props;
+
+    const [newRecipe, setNewRecipe] = useState({
+        id: ``,
+        name: ``,
+        ingredients: ``
+    });
+    const [isPostDisabled, setIsPostDisabled] = useState(true);
 
     const setName = (evt) => setNewRecipe({...newRecipe, name: evt.target.value});
     const setIngredients = (evt) => setNewRecipe({...newRecipe, ingredients: evt.target.value});
 
+    useEffect(() => {
+        if (newRecipe.name.length > RecipeLength.MIN && newRecipe.ingredients.length > RecipeLength.MIN) {
+        setIsPostDisabled(false);
+        } else {
+        setIsPostDisabled(true);
+        }
+    }, [newRecipe]);
+
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
         // evt.target.reset();
-        onFormSubmit();
+        let uniqueId = getUniqueId();
+        setNewRecipe({...newRecipe, id: uniqueId});
+        onFormSubmit(newRecipe);
         setIsShowModal(false);
     };
 

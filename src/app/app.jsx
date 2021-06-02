@@ -1,44 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddRecipe from '../add-recipe/add-recipe';
 import './app.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Accordion, Button, Container} from "react-bootstrap";
-import AccordionItem from "../accordion-item/accordion-item"
-
-const RecipeLength = {
-    MIN: 1,
-};
-
-const getUniqueId = () => {
-    return Math.random().toString(36).substr(2, 9);
-};
+import AccordionItem from "../accordion-item/accordion-item";
 
 function App(props) {
     const {recipesMocks} = props;
     const [isShowModal, setIsShowModal] = useState(false);
-    const [isPostDisabled, setIsPostDisabled] = useState(true);
 
     // let recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : recipesMocks;
     // let [recipes, setRecipes] = useState([]);
     let [recipes, setRecipes] = useState(recipesMocks);
 
-    const [newRecipe, setNewRecipe] = useState({
-        id: ``,
-        name: ``,
-        ingredients: ``
-    });
-
     // useEffect(() => {
     //     recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : recipesMocks;
     // }, [recipes, recipesMocks]);
 
-    useEffect(() => {
-        if (newRecipe.name.length > RecipeLength.MIN && newRecipe.ingredients.length > RecipeLength.MIN) {
-        setIsPostDisabled(false);
-        } else {
-        setIsPostDisabled(true);
-        }
-    }, [newRecipe]);
 
     const handleBtnAddRecipeClick = () => {
         //очистить форму
@@ -54,12 +32,8 @@ function App(props) {
         // localStorage.setItem('recipes', JSON.stringify(_recipes));
     };
 
-    const handleAddNewRecipe = () => {
+    const handleAddNewRecipe = (newRecipe) => {
         let _recipes = recipes.slice();
-        let uniqueId = getUniqueId();
-        setNewRecipe({...newRecipe, id: uniqueId});
-        console.log(uniqueId)
-        console.log(newRecipe)
         _recipes.push(newRecipe);
         setRecipes(_recipes);
         // localStorage.setItem('recipes', JSON.stringify(_recipes));
@@ -85,7 +59,7 @@ function App(props) {
         </Accordion>
 
         <Button variant="info" size="lg" onClick={handleBtnAddRecipeClick}>Add recipe</Button>
-        <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} isPostDisabled={isPostDisabled} newRecipe={newRecipe} setNewRecipe={setNewRecipe} onFormSubmit={handleAddNewRecipe} />
+        <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} onFormSubmit={handleAddNewRecipe} />
 
         </Container>
 

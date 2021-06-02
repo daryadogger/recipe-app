@@ -1,4 +1,3 @@
-// import {useState} from "react";
 import { useEffect, useState } from "react";
 import {Button, Form, Modal} from "react-bootstrap";
 
@@ -20,9 +19,9 @@ function EditRecipe(props) {
 
     useEffect(() => {
         if (editRecipe.name.length > RecipeLength.MIN && editRecipe.ingredients.length > RecipeLength.MIN) {
-        setIsPostDisabled(false);
+            setIsPostDisabled(false);
         } else {
-        setIsPostDisabled(true);
+            setIsPostDisabled(true);
         }
     }, [editRecipe]);
 
@@ -31,7 +30,6 @@ function EditRecipe(props) {
         onEditRecipe(id, editRecipe);
         setIsShowEditModal(false);
     };
-
 
     return(
         <Modal show={onShow} onHide={() => {setIsShowEditModal(false)}}>

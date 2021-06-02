@@ -3,7 +3,7 @@ import {Accordion, Card, ListGroup, Button, ButtonToolbar} from "react-bootstrap
 import EditRecipe from "../edit-recipe/edit-recipe";
 
 const getListOfIngredients = (string, separator) => {
-  return string.split(separator);
+    return string.split(separator);
 };
 
 function AccordionItem(props) {
@@ -21,7 +21,7 @@ function AccordionItem(props) {
     <Card>
 
       <Accordion.Toggle as={Card.Header} eventKey={recipe.id + 1} className="d-flex justify-content-between">
-        <p className="mb-0">{recipe.name}</p>
+        <p className="mb-0">{recipe.name}{recipe.id}</p>
       </Accordion.Toggle>
 
       <Accordion.Collapse eventKey={recipe.id + 1}>
