@@ -18,12 +18,19 @@ function App(props) {
     const [isShowModal, setIsShowModal] = useState(false);
     const [isPostDisabled, setIsPostDisabled] = useState(true);
 
-    const [recipes, setRecipes] = useState(recipesMocks);
+    // let recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : recipesMocks;
+    // let [recipes, setRecipes] = useState([]);
+    let [recipes, setRecipes] = useState(recipesMocks);
+
     const [newRecipe, setNewRecipe] = useState({
         id: ``,
         name: ``,
         ingredients: ``
     });
+
+    // useEffect(() => {
+    //     recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : recipesMocks;
+    // }, [recipes, recipesMocks]);
 
     useEffect(() => {
         if (newRecipe.name.length > RecipeLength.MIN && newRecipe.ingredients.length > RecipeLength.MIN) {
@@ -44,22 +51,26 @@ function App(props) {
 
         _recipes.splice(recipeIndex, 1);
         setRecipes(_recipes);
+        // localStorage.setItem('recipes', JSON.stringify(_recipes));
     };
 
     const handleAddNewRecipe = () => {
         let _recipes = recipes.slice();
         let uniqueId = getUniqueId();
         setNewRecipe({...newRecipe, id: uniqueId});
+        console.log(uniqueId)
+        console.log(newRecipe)
         _recipes.push(newRecipe);
         setRecipes(_recipes);
+        // localStorage.setItem('recipes', JSON.stringify(_recipes));
     };
 
     const handleEditRecipe = (id, editRecipe) => {
         let _recipes = recipes.slice();
         let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
-        console.log(recipeIndex)
         _recipes.splice(recipeIndex, 1, editRecipe);
         setRecipes(_recipes);
+        // localStorage.setItem('recipes', JSON.stringify(_recipes));
     };
 
     return (
