@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import {Button, Form, Modal} from "react-bootstrap";
-
-const RecipeLength = {
-    MIN: 1,
-};
+import { RecipeLength } from "../const";
 
 function EditRecipe(props) {
-    const {onShow, setIsShowEditModal, onEditRecipe, recipe, id} = props;
+    const {onShow, setIsShowEditModal, recipe, id, recipes, setRecipes} = props;
 
     const [isPostDisabled, setIsPostDisabled] = useState(true);
     const [editRecipe, setEditRecipe] = useState({
@@ -25,13 +22,22 @@ function EditRecipe(props) {
         }
     }, [editRecipe]);
 
+    const handleEditRecipe = (id, editRecipe) => {
+        let _recipes = recipes.slice();
+        let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
+        _recipes.splice(recipeIndex, 1, editRecipe);
+        setRecipes(_recipes);
+        // localStorage.setItem('recipes', JSON.stringify(_recipes));
+    };
+
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
-        onEditRecipe(id, editRecipe);
+        handleEditRecipe(id, editRecipe);
         setIsShowEditModal(false);
     };
 
     return(
+
         <Modal show={onShow} onHide={() => {setIsShowEditModal(false)}}>
             <Modal.Header closeButton>
                 <Modal.Title>Edit Recipe</Modal.Title>
@@ -51,6 +57,7 @@ function EditRecipe(props) {
                 </Form>
             </Modal.Body>
         </Modal>
+        
     );
 };
 

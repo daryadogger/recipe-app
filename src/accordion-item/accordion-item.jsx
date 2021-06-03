@@ -1,46 +1,31 @@
-import { useState } from "react";
-import {Accordion, Card, ListGroup, Button, ButtonToolbar} from "react-bootstrap";
-import EditRecipe from "../edit-recipe/edit-recipe";
-
-const getListOfIngredients = (string, separator) => {
-    return string.split(separator);
-};
+import {useState} from "react";
+import {getSplitedString} from "../functions/get-splited-string";
+import AccordionItemView from "./accordion-item-view";
 
 function AccordionItem(props) {
-  const {recipe, onEditRecipe, onDeleteRecipeClick, id} = props;
-  const ingredients = getListOfIngredients(recipe.ingredients, `,`);
+  const {recipe, recipes, setRecipes, id} = props;
+  
+  const ingredients = getSplitedString(recipe.ingredients, `,`);
 
   const [isShowEditModal, setIsShowEditModal] = useState(false);
 
-  const handleBtnEditRecipeClick = () => {
+  const handleBtnEditClick = () => {
     setIsShowEditModal(true);
   };
 
+  const handleBtnDeleteClick = (id) => {
+    let _recipes = recipes.slice();
+    let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
+
+    _recipes.splice(recipeIndex, 1);
+    setRecipes(_recipes);
+    // localStorage.setItem('recipes', JSON.stringify(_recipes));
+};
+
   return(
 
-    <Card>
-
-      <Accordion.Toggle as={Card.Header} eventKey={recipe.id + 1} className="d-flex justify-content-between">
-        <p className="mb-0">{recipe.name}{recipe.id}</p>
-      </Accordion.Toggle>
-
-      <Accordion.Collapse eventKey={recipe.id + 1}>
-        <div className="p-3">
-
-          <ListGroup className="mb-3">
-            {ingredients.map((ingridient) => <ListGroup.Item key={`ingridient-${ingridient}`} >{ingridient}</ListGroup.Item>)}
-          </ListGroup>
-
-          <ButtonToolbar>
-            <Button className="mr-2" variant="outline-secondary" size="sm" onClick={handleBtnEditRecipeClick}>Edit</Button>
-            <Button variant="outline-danger" size="sm" onClick={() => {onDeleteRecipeClick(id)}}>Delete</Button>
-          </ButtonToolbar>
-
-          <EditRecipe onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} onEditRecipe={onEditRecipe} id={id} />
-        </div>
-      </Accordion.Collapse>
-      
-    </Card>
+    <AccordionItemView id={id} ingredients={ingredients} recipe={recipe} onBtnEditClick={handleBtnEditClick} onBtnDeleteClick={handleBtnDeleteClick}
+      recipes={recipes} setRecipes={setRecipes} isShowEditModal={isShowEditModal} setIsShowEditModal={setIsShowEditModal} />
 
   );
 };

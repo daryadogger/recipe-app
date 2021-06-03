@@ -1,19 +1,13 @@
 import {useEffect, useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
-
-const getUniqueId = () => {
-    return Math.random().toString(36).substr(2, 9);
-};
-
-const RecipeLength = {
-    MIN: 1,
-};
+import { RecipeLength } from '../const';
+import { getUniqueId } from '../functions/get-unique-id';
+import AddRecipeView from './add-recipe-view';
 
 function AddRecipe(props) {
-    const {onShow, setIsShowModal, onFormSubmit} = props;
+    const {onShow, setIsShowModal, recipes, setRecipes} = props;
 
     const [newRecipe, setNewRecipe] = useState({
-        id: ``,
+        id: 5,
         name: ``,
         ingredients: ``
     });
@@ -30,35 +24,27 @@ function AddRecipe(props) {
         }
     }, [newRecipe]);
 
+    const handleAddNewRecipe = (newRecipe) => {
+        let _recipes = recipes.slice();
+        _recipes.push(newRecipe);
+        setRecipes(_recipes);
+        // localStorage.setItem('recipes', JSON.stringify(_recipes));
+    };
+
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
         // evt.target.reset();
         let uniqueId = getUniqueId();
         setNewRecipe({...newRecipe, id: uniqueId});
-        onFormSubmit(newRecipe);
+        handleAddNewRecipe(newRecipe);
         setIsShowModal(false);
     };
 
     return(
-        <Modal show={onShow} onHide={() => {setIsShowModal(false)}}>
-            <Modal.Header closeButton>
-                <Modal.Title>New Recipe</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-                <Form action="#" className="add-review__form" onSubmit={handleFormSubmit}>
-                    <Form.Group controlId="recipeName">
-                        <Form.Label>Recipe Name</Form.Label>
-                        <Form.Control type="text" required onChange={setName} defaultValue={newRecipe.name} placeholder="Enter Name" />
-                    </Form.Group>
-                    <Form.Group controlId="recipeIngredients">
-                        <Form.Label>Recipe Ingredients</Form.Label>
-                        <Form.Control type="text" required onChange={setIngredients} defaultValue={newRecipe.ingredients} placeholder="Enter Ingredients(separate by commas)" />
-                    </Form.Group>
-                    <Button variant="success" type="submit" disabled={isPostDisabled}>Save Recipe</Button>
-                </Form>
-            </Modal.Body>
-        </Modal>
+        
+        <AddRecipeView onFormSubmit={handleFormSubmit} onShow={onShow} setName={setName} setIngredients={setIngredients} setIsPostDisabled={setIsPostDisabled}
+            setIsShowModal={setIsShowModal} newRecipe={newRecipe} isPostDisabled={isPostDisabled} />
+            
     );
 };
 
