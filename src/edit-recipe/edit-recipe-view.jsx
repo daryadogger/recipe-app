@@ -1,3 +1,4 @@
+import React from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
 function EditRecipeView(props) {

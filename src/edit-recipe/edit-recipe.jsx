@@ -1,3 +1,4 @@
+import React from 'react';
 import {useEffect, useState} from "react";
 import {RecipeLength} from "../const";
 import EditRecipeView from "./edit-recipe-view";

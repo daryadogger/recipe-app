@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState} from "react";
 import {getSplitedString} from "../functions/get-splited-string";
 import AccordionItemView from "./accordion-item-view";
@@ -15,7 +16,6 @@ function AccordionItem(props) {
 
   const handleBtnDeleteClick = (id) => {
     let _recipes = JSON.parse(localStorage.getItem("recipes")).slice();
-    console.log(_recipes)
     let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
 
     _recipes.splice(recipeIndex, 1);

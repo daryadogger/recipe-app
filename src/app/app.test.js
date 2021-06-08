@@ -1,8 +1,11 @@
-import {render, screen} from '@testing-library/react';
-import App from './App';
+import React from 'react';
+import {render} from '@testing-library/react';
+import App from './app.jsx';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+it(`Отображает компонент App`, () => {
+  const {getByText} = render(
+      <App />
+  );
+
+  expect(getByText(/It's a recipes app! You're welcome!/i)).toBeInTheDocument();
 });

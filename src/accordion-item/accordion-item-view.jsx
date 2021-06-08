@@ -1,3 +1,4 @@
+import React from 'react';
 import {Accordion, Button, ButtonToolbar, Card, ListGroup} from "react-bootstrap";
 import EditRecipe from "../edit-recipe/edit-recipe";
 

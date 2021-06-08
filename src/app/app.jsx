@@ -1,3 +1,4 @@
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddRecipe from '../add-recipe/add-recipe';
 import './app.css';
@@ -8,8 +9,9 @@ import AccordionItem from "../accordion-item/accordion-item";
 function App(props) {
     const {recipesMocks} = props;
     const [isShowModal, setIsShowModal] = useState(false);
-    
+
     let recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : localStorage.setItem('recipes', JSON.stringify(recipesMocks));
+    console.log(recipes)
 
     const handleBtnAddRecipeClick = () => {
         setIsShowModal(true);

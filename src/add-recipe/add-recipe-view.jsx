@@ -1,4 +1,5 @@
-import { Button, Form, Modal } from "react-bootstrap";
+import React from 'react';
+import {Button, Form, Modal} from "react-bootstrap";
 
 function AddRecipeView(props) {
     const {onFormSubmit, onShow, setIngredients, setName, setIsShowModal, newRecipe, isPostDisabled} = props;
