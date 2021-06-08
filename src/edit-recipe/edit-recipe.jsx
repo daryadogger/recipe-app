@@ -3,7 +3,7 @@ import {RecipeLength} from "../const";
 import EditRecipeView from "./edit-recipe-view";
 
 function EditRecipe(props) {
-    const {onShow, setIsShowEditModal, recipe, id, recipes} = props;
+    const {onShow, setIsShowEditModal, recipe, id} = props;
 
     const [isPostDisabled, setIsPostDisabled] = useState(true);
     const [editRecipe, setEditRecipe] = useState({
@@ -23,7 +23,7 @@ function EditRecipe(props) {
     }, [editRecipe]);
 
     const handleEditRecipe = (id, editRecipe) => {
-        let _recipes = recipes.slice();
+        let _recipes = JSON.parse(localStorage.getItem("recipes")).slice();
         let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
         _recipes.splice(recipeIndex, 1, editRecipe);
         localStorage.setItem('recipes', JSON.stringify(_recipes));

@@ -3,7 +3,7 @@ import {getSplitedString} from "../functions/get-splited-string";
 import AccordionItemView from "./accordion-item-view";
 
 function AccordionItem(props) {
-  const {recipe, recipes, setRecipes, id} = props;
+  const {recipe, setRecipes, id} = props;
   
   const ingredients = getSplitedString(recipe.ingredients, `,`);
 
@@ -14,17 +14,18 @@ function AccordionItem(props) {
   };
 
   const handleBtnDeleteClick = (id) => {
-    let _recipes = recipes.slice();
+    let _recipes = JSON.parse(localStorage.getItem("recipes")).slice();
+    console.log(_recipes)
     let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
 
     _recipes.splice(recipeIndex, 1);
     localStorage.setItem('recipes', JSON.stringify(_recipes));
-};
+  };
 
   return(
 
     <AccordionItemView id={id} ingredients={ingredients} recipe={recipe} onBtnEditClick={handleBtnEditClick} onBtnDeleteClick={handleBtnDeleteClick}
-      recipes={recipes} setRecipes={setRecipes} isShowEditModal={isShowEditModal} setIsShowEditModal={setIsShowEditModal} />
+      setRecipes={setRecipes} isShowEditModal={isShowEditModal} setIsShowEditModal={setIsShowEditModal} />
 
   );
 };

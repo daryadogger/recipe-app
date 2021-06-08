@@ -4,7 +4,7 @@ import {getUniqueId} from '../functions/get-unique-id';
 import AddRecipeView from './add-recipe-view';
 
 function AddRecipe(props) {
-    const {onShow, setIsShowModal, recipes} = props;
+    const {onShow, setIsShowModal} = props;
 
     const [newRecipe, setNewRecipe] = useState({
         id: getUniqueId(),
@@ -25,7 +25,7 @@ function AddRecipe(props) {
     }, [newRecipe]);
 
     const handleAddNewRecipe = (newRecipe) => {
-        let _recipes = recipes.slice();
+        let _recipes = JSON.parse(localStorage.getItem("recipes")).slice();
         _recipes.push(newRecipe);
         localStorage.setItem('recipes', JSON.stringify(_recipes));
     };
