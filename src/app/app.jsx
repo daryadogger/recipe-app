@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddRecipe from '../add-recipe/add-recipe';
 import './app.css';
@@ -13,9 +13,9 @@ function App(props) {
     let recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : localStorage.setItem('recipes', JSON.stringify(recipesMocks));
     console.log(recipes)
 
-    const handleBtnAddRecipeClick = () => {
+    const handleBtnAddRecipeClick = useCallback(() => {
         setIsShowModal(true);
-    };
+    }, []);
 
     return (
 
