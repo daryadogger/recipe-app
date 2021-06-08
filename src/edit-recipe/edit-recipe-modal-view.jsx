@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
-function EditRecipeView(props) {
+function EditRecipeModalView(props) {
     const {onShow, setIsShowEditModal, handleFormSubmit, recipe, setIngredients, setName, isPostDisabled} = props;
 
     return(
@@ -29,4 +29,4 @@ function EditRecipeView(props) {
     );
 };
 
-export default EditRecipeView;
+export default EditRecipeModalView;

@@ -11,15 +11,14 @@ function AccordionItem(props) {
   const [isShowEditModal, setIsShowEditModal] = useState(false);
 
   const handleBtnEditClick = useCallback(() => {
-    setIsShowEditModal(true);
-  }, []);
+    setIsShowEditModal(!isShowEditModal);
+  }, [isShowEditModal]);
 
   const handleBtnDeleteClick = (id) => {
-    let _recipes = JSON.parse(localStorage.getItem("recipes")).slice();
+    let _recipes = JSON.parse(localStorage.getItem('recipes')).slice();
     let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
-
     _recipes.splice(recipeIndex, 1);
-    localStorage.setItem('recipes', JSON.stringify(_recipes));
+    setRecipes(_recipes);
   };
 
   return(

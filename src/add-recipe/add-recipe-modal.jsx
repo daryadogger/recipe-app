@@ -2,10 +2,10 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 import {RecipeLength} from '../const';
 import {getUniqueId} from '../functions/get-unique-id';
-import AddRecipeView from './add-recipe-view';
+import AddRecipeModalView from './add-recipe-modal-view';
 
-function AddRecipe(props) {
-    const {onShow, setIsShowModal} = props;
+function AddRecipeModal(props) {
+    const {onShow, setIsShowModal, setRecipes} = props;
 
     const [newRecipe, setNewRecipe] = useState({
         id: getUniqueId(),
@@ -26,9 +26,15 @@ function AddRecipe(props) {
     }, [newRecipe]);
 
     const handleAddNewRecipe = (newRecipe) => {
-        let _recipes = JSON.parse(localStorage.getItem("recipes")).slice();
+        let _recipes = JSON.parse(localStorage.getItem('recipes')).slice();
         _recipes.push(newRecipe);
-        localStorage.setItem('recipes', JSON.stringify(_recipes));
+        setRecipes(_recipes);
+
+        setNewRecipe({
+            id: getUniqueId(),
+            name: ``,
+            ingredients: ``
+        });
     };
 
     const handleFormSubmit = (evt) => {
@@ -41,10 +47,10 @@ function AddRecipe(props) {
 
     return(
         
-        <AddRecipeView onFormSubmit={handleFormSubmit} onShow={onShow} setName={setName} setIngredients={setIngredients} setIsPostDisabled={setIsPostDisabled}
+        <AddRecipeModalView onFormSubmit={handleFormSubmit} onShow={onShow} setName={setName} setIngredients={setIngredients} setIsPostDisabled={setIsPostDisabled}
             setIsShowModal={setIsShowModal} newRecipe={newRecipe} isPostDisabled={isPostDisabled} />
             
     );
 };
 
-export default AddRecipe;
+export default AddRecipeModal;

@@ -1,21 +1,21 @@
 import React, {useCallback} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddRecipe from '../add-recipe/add-recipe';
+import AddRecipeModal from '../add-recipe/add-recipe-modal';
 import './app.css';
 import {useState} from "react";
 import {Accordion, Button, Container} from "react-bootstrap";
 import AccordionItem from "../accordion-item/accordion-item";
+import {useLocalStorage} from '../hooks/use-local-storage';
 
 function App(props) {
     const {recipesMocks} = props;
+    
     const [isShowModal, setIsShowModal] = useState(false);
-
-    let recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : localStorage.setItem('recipes', JSON.stringify(recipesMocks));
-    console.log(recipes)
+    const [recipes, setRecipes] = useLocalStorage("recipes", recipesMocks);
 
     const handleBtnAddRecipeClick = useCallback(() => {
-        setIsShowModal(true);
-    }, []);
+        setIsShowModal(!isShowModal);
+    }, [isShowModal]);
 
     return (
 
@@ -24,12 +24,12 @@ function App(props) {
 
             <Accordion className="mb-4">
 
-                {recipes.map((recipe) => <AccordionItem recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} />)}
+                {recipes.map((recipe) => <AccordionItem recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} setRecipes={setRecipes} />)}
 
             </Accordion>
 
             <Button variant="info" size="lg" onClick={handleBtnAddRecipeClick}>Add recipe</Button>
-            <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} />
+            <AddRecipeModal onShow={isShowModal} setIsShowModal={setIsShowModal} setRecipes={setRecipes} />
 
         </Container>
 

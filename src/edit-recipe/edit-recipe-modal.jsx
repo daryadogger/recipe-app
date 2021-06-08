@@ -1,10 +1,10 @@
 import React from 'react';
 import {useEffect, useState} from "react";
 import {RecipeLength} from "../const";
-import EditRecipeView from "./edit-recipe-view";
+import EditRecipeModalView from "./edit-recipe-modal-view";
 
-function EditRecipe(props) {
-    const {onShow, setIsShowEditModal, recipe, id} = props;
+function EditRecipeModal(props) {
+    const {onShow, setIsShowEditModal, recipe, id, setRecipes} = props;
 
     const [isPostDisabled, setIsPostDisabled] = useState(true);
     const [editRecipe, setEditRecipe] = useState({
@@ -24,10 +24,10 @@ function EditRecipe(props) {
     }, [editRecipe]);
 
     const handleEditRecipe = (id, editRecipe) => {
-        let _recipes = JSON.parse(localStorage.getItem("recipes")).slice();
+        let _recipes = JSON.parse(localStorage.getItem('recipes')).slice();
         let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
         _recipes.splice(recipeIndex, 1, editRecipe);
-        localStorage.setItem('recipes', JSON.stringify(_recipes));
+        setRecipes(_recipes);
     };
 
     const handleFormSubmit = (evt) => {
@@ -38,10 +38,10 @@ function EditRecipe(props) {
 
     return(
 
-        <EditRecipeView recipe={recipe} onShow={onShow} setIsShowEditModal={setIsShowEditModal} handleFormSubmit={handleFormSubmit} setName={setName}
+        <EditRecipeModalView recipe={recipe} onShow={onShow} setIsShowEditModal={setIsShowEditModal} handleFormSubmit={handleFormSubmit} setName={setName}
             setIngredients={setIngredients} isPostDisabled={isPostDisabled} />
         
     );
 };
 
-export default EditRecipe;
+export default EditRecipeModal;

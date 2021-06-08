@@ -1,9 +1,9 @@
 import React from 'react';
 import {Accordion, Button, ButtonToolbar, Card, ListGroup} from "react-bootstrap";
-import EditRecipe from "../edit-recipe/edit-recipe";
+import EditRecipeModal from "../edit-recipe/edit-recipe-modal";
 
 function AccordionItemView(props) {
-    const {recipe, ingredients, onBtnEditClick, onBtnDeleteClick, recipes, setRecipes, id, isShowEditModal, setIsShowEditModal} = props;
+    const {recipe, ingredients, onBtnEditClick, onBtnDeleteClick, setRecipes, id, isShowEditModal, setIsShowEditModal} = props;
 
     return(
 
@@ -25,7 +25,7 @@ function AccordionItemView(props) {
                 <Button variant="outline-danger" size="sm" onClick={() => {onBtnDeleteClick(id)}}>Delete</Button>
             </ButtonToolbar>
 
-            <EditRecipe onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} recipes={recipes} setRecipes={setRecipes} id={id} />
+            <EditRecipeModal onShow={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipe={recipe} setRecipes={setRecipes} id={id} />
             </div>
         </Accordion.Collapse>
         
