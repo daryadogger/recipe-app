@@ -9,13 +9,7 @@ function App(props) {
     const {recipesMocks} = props;
     const [isShowModal, setIsShowModal] = useState(false);
     
-    let [recipes, setRecipes] = useState(recipesMocks);
-    // let recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : recipesMocks;
-    // let [recipes, setRecipes] = useState([]);
-
-    // useEffect(() => {
-    //     recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : recipesMocks;
-    // }, [recipes, recipesMocks]);
+    let recipes = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : localStorage.setItem('recipes', JSON.stringify(recipesMocks));
 
     const handleBtnAddRecipeClick = () => {
         setIsShowModal(true);
@@ -28,12 +22,12 @@ function App(props) {
 
             <Accordion className="mb-4">
 
-                {recipes.map((recipe) => <AccordionItem recipes={recipes} setRecipes={setRecipes} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} />)}
+                {recipes.map((recipe) => <AccordionItem recipes={recipes} recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} />)}
 
             </Accordion>
 
             <Button variant="info" size="lg" onClick={handleBtnAddRecipeClick}>Add recipe</Button>
-            <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} recipes={recipes} setRecipes={setRecipes} />
+            <AddRecipe onShow={isShowModal} setIsShowModal={setIsShowModal} recipes={recipes} />
 
         </Container>
 

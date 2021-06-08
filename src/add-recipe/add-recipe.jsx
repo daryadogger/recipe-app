@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
-import { RecipeLength } from '../const';
-import { getUniqueId } from '../functions/get-unique-id';
+import {RecipeLength} from '../const';
+import {getUniqueId} from '../functions/get-unique-id';
 import AddRecipeView from './add-recipe-view';
 
 function AddRecipe(props) {
-    const {onShow, setIsShowModal, recipes, setRecipes} = props;
+    const {onShow, setIsShowModal, recipes} = props;
 
     const [newRecipe, setNewRecipe] = useState({
-        id: 5,
+        id: getUniqueId(),
         name: ``,
         ingredients: ``
     });
@@ -18,22 +18,20 @@ function AddRecipe(props) {
 
     useEffect(() => {
         if (newRecipe.name.length > RecipeLength.MIN && newRecipe.ingredients.length > RecipeLength.MIN) {
-        setIsPostDisabled(false);
+            setIsPostDisabled(false);
         } else {
-        setIsPostDisabled(true);
+            setIsPostDisabled(true);
         }
     }, [newRecipe]);
 
     const handleAddNewRecipe = (newRecipe) => {
         let _recipes = recipes.slice();
         _recipes.push(newRecipe);
-        setRecipes(_recipes);
-        // localStorage.setItem('recipes', JSON.stringify(_recipes));
+        localStorage.setItem('recipes', JSON.stringify(_recipes));
     };
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
-        // evt.target.reset();
         let uniqueId = getUniqueId();
         setNewRecipe({...newRecipe, id: uniqueId});
         handleAddNewRecipe(newRecipe);

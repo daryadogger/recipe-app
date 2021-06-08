@@ -9,7 +9,7 @@ function AccordionItemView(props) {
         <Card>
 
         <Accordion.Toggle as={Card.Header} eventKey={recipe.id + 1} className="d-flex justify-content-between">
-            <p className="mb-0">{recipe.name}{recipe.id}</p>
+            <p className="mb-0">{recipe.name}</p>
         </Accordion.Toggle>
 
         <Accordion.Collapse eventKey={recipe.id + 1}>

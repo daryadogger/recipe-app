@@ -18,8 +18,7 @@ function AccordionItem(props) {
     let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
 
     _recipes.splice(recipeIndex, 1);
-    setRecipes(_recipes);
-    // localStorage.setItem('recipes', JSON.stringify(_recipes));
+    localStorage.setItem('recipes', JSON.stringify(_recipes));
 };
 
   return(
