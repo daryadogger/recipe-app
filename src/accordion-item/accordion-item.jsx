@@ -17,6 +17,7 @@ function AccordionItem(props) {
   const handleBtnDeleteClick = (id) => {
     let _recipes = JSON.parse(localStorage.getItem('recipes')).slice();
     let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
+    
     _recipes.splice(recipeIndex, 1);
     setRecipes(_recipes);
   };

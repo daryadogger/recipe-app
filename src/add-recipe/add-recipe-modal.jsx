@@ -27,6 +27,7 @@ function AddRecipeModal(props) {
 
     const handleAddNewRecipe = (newRecipe) => {
         let _recipes = JSON.parse(localStorage.getItem('recipes')).slice();
+
         _recipes.push(newRecipe);
         setRecipes(_recipes);
 
@@ -40,6 +41,7 @@ function AddRecipeModal(props) {
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
         let uniqueId = getUniqueId();
+        
         setNewRecipe({...newRecipe, id: uniqueId});
         handleAddNewRecipe(newRecipe);
         setIsShowModal(false);

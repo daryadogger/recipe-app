@@ -26,12 +26,14 @@ function EditRecipeModal(props) {
     const handleEditRecipe = (id, editRecipe) => {
         let _recipes = JSON.parse(localStorage.getItem('recipes')).slice();
         let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
+
         _recipes.splice(recipeIndex, 1, editRecipe);
         setRecipes(_recipes);
     };
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
+        
         handleEditRecipe(id, editRecipe);
         setIsShowEditModal(false);
     };
