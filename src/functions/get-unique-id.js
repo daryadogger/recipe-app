@@ -1,3 +1,4 @@
 export const getUniqueId = () => {
-    return Math.random();
+    const arr = (typeof localStorage["recipes"] !== "undefined") ? JSON.parse(localStorage.getItem("recipes")) : Math.random();
+    return arr.length;
 };

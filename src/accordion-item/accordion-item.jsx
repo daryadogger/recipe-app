@@ -4,7 +4,7 @@ import {getSplitedString} from "../functions/get-splited-string";
 import AccordionItemView from "./accordion-item-view";
 
 function AccordionItem(props) {
-    const {recipe, setRecipes, id} = props;
+    const {recipe, setRecipes, id, recipes} = props;
     
     const ingredients = getSplitedString(recipe.ingredients, `,`);
 
@@ -15,7 +15,7 @@ function AccordionItem(props) {
     }, [isShowEditModal]);
 
     const handleBtnDeleteClick = (id) => {
-        let _recipes = JSON.parse(localStorage.getItem('recipes')).slice();
+        let _recipes = recipes.slice();
         let recipeIndex = _recipes.findIndex(recipe => recipe.id === id);
         
         _recipes.splice(recipeIndex, 1);
@@ -25,7 +25,7 @@ function AccordionItem(props) {
     return(
 
         <AccordionItemView id={id} ingredients={ingredients} recipe={recipe} onBtnEditClick={handleBtnEditClick} onBtnDeleteClick={handleBtnDeleteClick}
-        setRecipes={setRecipes} isShowEditModal={isShowEditModal} setIsShowEditModal={setIsShowEditModal} />
+        setRecipes={setRecipes} isShowEditModal={isShowEditModal} setIsShowEditModal={setIsShowEditModal} recipes={recipes} />
 
     );
 };

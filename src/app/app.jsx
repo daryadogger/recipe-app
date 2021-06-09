@@ -24,12 +24,12 @@ function App(props) {
 
             <Accordion className="mb-4">
 
-                {recipes.map((recipe) => <AccordionItem recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} setRecipes={setRecipes} />)}
+                {recipes.map((recipe) => <AccordionItem recipe={recipe} id={recipe.id} key={`recipe-${recipe.id}`} recipes={recipes} setRecipes={setRecipes} />)}
 
             </Accordion>
 
             <Button variant="info" size="lg" onClick={handleBtnAddRecipeClick}>Add recipe</Button>
-            <AddRecipeModal onShow={isShowModal} setIsShowModal={setIsShowModal} setRecipes={setRecipes} />
+            <AddRecipeModal onShow={isShowModal} setIsShowModal={setIsShowModal} setRecipes={setRecipes} recipes={recipes} />
 
         </Container>
 
