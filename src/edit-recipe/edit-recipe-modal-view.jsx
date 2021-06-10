@@ -15,11 +15,11 @@ function EditRecipeModalView(props) {
                 <Form action="#" className="add-review__form" onSubmit={handleFormSubmit}>
                     <Form.Group controlId="recipeName">
                         <Form.Label>Recipe Name</Form.Label>
-                        <Form.Control type="text" required onChange={setName} defaultValue={recipe.name} placeholder="Enter Name" />
+                        <Form.Control type="text" required onChange={setName} defaultValue={recipe.name} placeholder="Enter Name" data-testid="name" />
                     </Form.Group>
                     <Form.Group controlId="recipeIngredients">
                         <Form.Label>Recipe Ingredients</Form.Label>
-                        <Form.Control type="text" required onChange={setIngredients} defaultValue={recipe.ingredients} placeholder="Enter Ingredients(separate by commas)" />
+                        <Form.Control type="text" required onChange={setIngredients} defaultValue={recipe.ingredients} placeholder="Enter Ingredients(separate by commas)" data-testid="ingredients" />
                     </Form.Group>
                     <Button variant="success" type="submit" disabled={isPostDisabled}>Save Recipe</Button>
                 </Form>
