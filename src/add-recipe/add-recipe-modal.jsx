@@ -12,7 +12,7 @@ function AddRecipeModal(props) {
         name: ``,
         ingredients: ``
     });
-    console.log(newRecipe)
+
     const [isPostDisabled, setIsPostDisabled] = useState(true);
 
     const setName = (evt) => setNewRecipe({...newRecipe, name: evt.target.value});
