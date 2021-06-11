@@ -43,7 +43,6 @@ function AddRecipeModal(props) {
         evt.preventDefault();
         
         setNewRecipe({...newRecipe, id: getUniqueId()});
-        console.log(getUniqueId())
         handleAddNewRecipe(newRecipe);
         setIsShowModal(false);
     };
