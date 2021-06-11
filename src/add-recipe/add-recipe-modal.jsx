@@ -12,6 +12,7 @@ function AddRecipeModal(props) {
         name: ``,
         ingredients: ``
     });
+    console.log(newRecipe)
     const [isPostDisabled, setIsPostDisabled] = useState(true);
 
     const setName = (evt) => setNewRecipe({...newRecipe, name: evt.target.value});
@@ -40,9 +41,9 @@ function AddRecipeModal(props) {
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
-        let uniqueId = getUniqueId();
         
-        setNewRecipe({...newRecipe, id: uniqueId});
+        setNewRecipe({...newRecipe, id: getUniqueId()});
+        console.log(getUniqueId())
         handleAddNewRecipe(newRecipe);
         setIsShowModal(false);
     };
